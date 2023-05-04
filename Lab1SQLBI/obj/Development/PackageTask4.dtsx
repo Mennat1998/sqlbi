@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/29/2023 10:05:22 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MENNATALLAH"
+  DTS:CreatorName="MENNATALLAH\elkarnk2"
+  DTS:DTSID="{6788CCEC-72FC-46F7-8C0D-E65F85131772}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5209.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{57780DDD-6DDA-4C90-BDFA-E787FE44993D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Alex_Sales_Q1.txt]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{5A542A62-21F2-46C3-96BD-7CBF143AB88D}"
+      DTS:ObjectName="Alex_Sales_Q1.txt">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@path</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.ITI_System]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{116683CD-C375-4915-95D8-997F262F85C7}"
+      DTS:ObjectName="LocalHost.ITI_System">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=ITI_System;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{116683CD-C375-4915-95D8-997F262F85C7}LocalHost.ITI_System;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7336A8C2-4830-4A5C-B448-46713DC63768}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="path">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{4DBE83C5-F89C-4844-95A6-17132CFA0504}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{6AF0C32D-9FCB-4CAD-97DA-4E2811D0408C}"
+        DTS:ObjectName="{6AF0C32D-9FCB-4CAD-97DA-4E2811D0408C}">
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="D:\iti\sql bi\SQL_BI_Day1\Sources\CarrefourSales" />
+            <FEFEProperty
+              FileSpec="*.*" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="-1" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Bulk Insert Task"
+          DTS:CreationName="Microsoft.BulkInsertTask"
+          DTS:Description="Bulk Insert Task"
+          DTS:DTSID="{E755116E-A7E9-46FB-AF4E-2223FF8B9317}"
+          DTS:ExecutableType="Microsoft.BulkInsertTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Bulk Insert Task"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <BulkInsertTask:BulkInsertTaskData
+              BulkInsertTask:SourceConnectionName="{5A542A62-21F2-46C3-96BD-7CBF143AB88D}"
+              BulkInsertTask:DestinationConnectionName="{116683CD-C375-4915-95D8-997F262F85C7}"
+              BulkInsertTask:DestinationTableName="[dbo].[Sales]"
+              BulkInsertTask:FieldTerminator="Comma {,}" xmlns:BulkInsertTask="www.microsoft.com/sqlserver/dts/tasks/bulkinserttask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{BB2C0C8A-D899-4B33-B0B9-70D1EF21C7EE}"
+          DTS:ObjectName="{BB2C0C8A-D899-4B33-B0B9-70D1EF21C7EE}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::path" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\Foreach Loop Container\Bulk Insert Task"
+          TopLeft="26.4714289941351,22.2176469964861" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="204.8,119.2"
+          Size="204.8,162.4"
+          Id="Package\Foreach Loop Container"
+          TopLeft="177.642857509304,10.8529411717785" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
